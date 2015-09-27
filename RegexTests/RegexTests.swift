@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 bryn austin bellomy. All rights reserved.
 //
 
-import Cocoa
+import UIKit
 import XCTest
 import Regex
 

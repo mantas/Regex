@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 bryn austin bellomy. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <UIKit/UIKit.h>
 
 //! Project version number for Regex.
 FOUNDATION_EXPORT double RegexVersionNumber;
