@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   s.documentation_url = 'http://brynbellomy.github.io/Regex/index.html'
 
   s.ios.deployment_target = '8.0'
+  s.tvos.deployment_target = '9.0'
   s.osx.deployment_target = '10.10'
   s.source_files = 'src/*.swift'
   s.requires_arc = true
