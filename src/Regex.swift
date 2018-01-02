@@ -22,7 +22,7 @@ public extension String
         Searches the receiving string with the regex given in `pattern`, replaces the match(es) with `replacement`, and returns the resulting string.
      */
     public func replaceRegex(_ pattern:String, with replacement:String) -> String {
-        return map(self =~ Regex(pattern), replacementTemplate: replacement)
+        return mapRegex(self =~ Regex(pattern), replacementTemplate: replacement)
     }
 }
 
@@ -183,7 +183,7 @@ public struct Regex
         - returns: The transformed search string.
      */
     public func replaceMatches (in string:String, with replacement:String) -> String {
-        return map((string =~ self), replacementTemplate: replacement)
+        return mapRegex((string =~ self), replacementTemplate: replacement)
     }
 }
 
@@ -274,7 +274,7 @@ public struct RegexMatchResult: Sequence
 /**
     Returns the `String` created by replacing the regular expression matches in `regexResult` using `replacementTemplate`.
  */
-public func map (_ regexResult:Regex.MatchResult, replacementTemplate:String) -> String
+public func mapRegex (_ regexResult:Regex.MatchResult, replacementTemplate:String) -> String
 {
     let searchString = NSMutableString(string: regexResult.searchString)
     let fullRange    = regexResult.searchString.fullNSRange
