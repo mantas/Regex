@@ -29,21 +29,21 @@ public extension String
 extension String
 {
     var fullRange:   Range<String.Index> { return startIndex ..< endIndex }
-    var fullNSRange: NSRange             { return NSRange(location:0, length:self.characters.count) }
+    var fullNSRange: NSRange             { return NSRange(location:0, length:self.count) }
 
     func substringWithRange (_ range:NSRange) -> String {
-       return substring(with: convertRange(range))
+       return String(self[convertRange(range)])
     }
 
     func convertRange (_ range: Range<Int>) -> Range<String.Index> {
-        let start = self.characters.index(self.startIndex, offsetBy: range.lowerBound)
-        let end   = self.characters.index(start, offsetBy: range.upperBound - range.lowerBound)
+        let start = self.index(self.startIndex, offsetBy: range.lowerBound)
+        let end   = self.index(start, offsetBy: range.upperBound - range.lowerBound)
         return (start ..< end)
     }
 
     func convertRange (_ nsrange:NSRange) -> Range<String.Index> {
-        let start = self.characters.index(self.startIndex, offsetBy: nsrange.location)
-        let end   = self.characters.index(start, offsetBy: nsrange.length)
+        let start = self.index(self.startIndex, offsetBy: nsrange.location)
+        let end   = self.index(start, offsetBy: nsrange.length)
         return (start ..< end)
     }
 }
@@ -142,7 +142,7 @@ public struct Regex
     public func match (_ string:String) -> MatchResult
     {
         var matches  = [NSTextCheckingResult]()
-        let all      = NSRange(location: 0, length: string.characters.count)
+        let all      = NSRange(location: 0, length: string.count)
         let moptions = NSRegularExpression.MatchingOptions(rawValue: 0)
 
         nsRegex.enumerateMatches(in: string, options:moptions, range:all) {
@@ -229,7 +229,7 @@ public struct RegexMatchResult: Sequence
 
         captures = items.flatMap { result in
             (0 ..< result.numberOfRanges).map { i in
-                let nsrange = result.rangeAt(i)
+                let nsrange = result.range(at: i)
                 return s.substringWithRange(nsrange)
             }
         }
