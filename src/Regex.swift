@@ -228,9 +228,12 @@ public struct RegexMatchResult: Sequence
         items = i
 
         captures = items.flatMap { result in
-            (0 ..< result.numberOfRanges).map { i in
+            (0 ..< result.numberOfRanges).compactMap { i in
                 let nsrange = result.range(at: i)
-                return s.substringWithRange(nsrange)
+                if nsrange.location != NSNotFound {
+                    return s.substringWithRange(nsrange)
+                }
+                return nil
             }
         }
     }
